@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Signin Template · Bootstrap v5.0</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/signin.css') }}" rel="stylesheet">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+    <!-- Custom styles for this template -->
+    <link href="signin.css" rel="stylesheet">
+</head>
+<body class="text-center">
+
+<main class="form-signin">
+    <!-- Отображение сообщений Flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="alert-container">
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    <!-- Конец блоку Flash повідомлень -->
+
+    <form action="/sign_up" method="post" id="signinForm">
+    <img class="mb-4" src="{{ url_for('static', filename='img/logo.svg') }}" alt="Sign up image" width="72" height="57">
+    <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
+
+    <div class="form-floating mb-4">
+        <input type="text" class="form-control" id="floatingUsername" name="name" placeholder="Username" required>
+        <label for="floatingUsername">Username</label>
+    </div>
+
+    <div class="form-floating mb-4">
+        <input type="email" class="form-control" id="floatingEmail" name="email" placeholder="Email address" required>
+        <label for="floatingEmail">Email address</label>
+    </div>
+
+    <div class="form-floating mb-4">
+        <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" required>
+        <label for="floatingPassword">Password</label>
+    </div>
+
+    <div class="checkbox mb-3">
+       <label>
+
+            <input type="checkbox" id="cookies_log" name="remember_me" value="true"> Remember me
+
+             <input type="hidden" name="remember_me" value="false">
+        </label>
+    </div>
+
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
+</form>
+
+    <p class="mt-5 mb-3 text-muted">&copy; 2024–2024</p>
+</main>
+
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>
