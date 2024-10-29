@@ -279,7 +279,7 @@ class PostManager(DatabaseManager):
     def UPDATE(self, session, values, post_id):
         super().UPDATE(session, values, post_id)
         posts = session.query(Posts).filter(Posts.id == post_id).first()
-        comments = session.query(Comments).filter(Comments.id == post_id).all()
+        comments = session.query(Comments).filter(Comments.id == int(post_id)).all()
         if posts:
             for key, value in values.items():
                 setattr(posts, key, value)

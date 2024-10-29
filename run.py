@@ -243,11 +243,12 @@ def posts_UPDATE(post_id):
 @app.route('/posts/<post_id>', methods=['DELETE'])
 def posts_DELETE(post_id):
     logging.info(f"Post_id is: {post_id}")
-    post_comments = comments_db.EXECUTE()
+    post_comments = comments_db.EXECUTE(method="GET")
     if post_comments['status_code'] == 200:
-        for comment in post_comments['result']:
-            if int(comment['post_id']) == int(post_id):
-                comments_db.EXECUTE("DELETE", idc=comment['id'])
+       if 'result' in post_comments:
+           for comment in post_comments['result']:
+               if int(comment['post_id']) == int(post_id):
+                   comments_db.EXECUTE("DELETE", idc=comment['id'])
     result = posts_db.EXECUTE("DELETE", idc=post_id)
 
     return result
@@ -280,7 +281,6 @@ def comment_ADD(post_id):
         return result
 
     except ProfanityException as ex:
-        status_code = 400
         posts_db.EXECUTE(method="PATCH", idc=post_id)
         return render_template("/error/error_page.html", info=ex.__str__())
 
