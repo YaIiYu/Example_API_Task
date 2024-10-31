@@ -47,4 +47,5 @@ This repository contains a simple API for managing posts and comments, developed
 3.	**Environment Configuration:**
    To configure environment variables for user authentication and moderation API, running the Application
    To start the API locally, run:
-       ```waitress-serve --host=0.0.0.0 --port=<port> run:app
+       ```cmd
+       waitress-serve --host=0.0.0.0 --port=<port> run:app
